@@ -6,7 +6,7 @@
 (defn format-time [x]
   (let [t (-> (System/currentTimeMillis) (quot 1000) (- x) (/ 60))]
     (cond
-      (< t 60) (str t " mins")
+      (< t 60) (str (int t) " mins")
       (< t 1440) (str (int (/ t 60)) " hours")
       :else (str (int (/ t 1440)) " days"))))
 

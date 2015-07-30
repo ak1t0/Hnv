@@ -106,7 +106,7 @@
     [:div {:class "card hoverable"}
       [:div {:class "card-content"}
         [:h5 title]
-        [:p {:class "gray-text"} url]
+        [:p [:span {:style "color:#bdbdbd;"} url]]
         [:p (str comments " comments " score " points " " by " user " " time " ago ")]]
       [:div {:class "card-action"}
         [:a {:href url} "Source"]
