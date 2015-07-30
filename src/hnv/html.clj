@@ -70,7 +70,7 @@
           [:h5 {:class "white-text"}"Connect"]
             [:br]
             [:iframe {:src
-                      "http://ghbtns.com/github-btn.html?user=ak1t0&repo=Hnv&type=watch&count=true&size=large"
+                      "https://ghbtns.com/github-btn.html?user=ak1t0&repo=Hnv&type=watch&count=true&size=large"
                       :allowtransparency "true" :frameborder "0" :scrolling "0"
                       :width "170" :height "30"}]
             [:br] [:br]]]]
