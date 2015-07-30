@@ -112,16 +112,12 @@
         [:a {:href url} "Source"]
         [:a {:href "#"} "More"]]]])
 
-(defn generate-tcard [id]
-  (->> id
-    (query/get-json)
-    (query/format-json)
-    (cardnize)))
-
 (defn tcard []
   (->> (query/get-topstory)
     (take 10)
-    (map generate-tcard)
+    (map query/get-json)
+    (map query/format-json)
+    (map cardnize)
     (containize)))
 
 (defn topnews []
