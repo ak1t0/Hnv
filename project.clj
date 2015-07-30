@@ -17,6 +17,7 @@
   ;; for ring
   :ring {:handler hnv.handler/app}
   :main hnv.handler
+  :min-lein-version "2.0.0"
   :uberjar-name "hnv-standalone.jar"
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
