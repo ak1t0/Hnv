@@ -5,8 +5,7 @@
             [ring.adapter.jetty :as jetty]
             [clojure.java.io :as io]
             [environ.core :refer [env]]
-            [hnv.html :refer [index top-viewer quality-viewer]])
-  (:gen-class))
+            [hnv.html :refer [index top-viewer quality-viewer]]))
 
 (defroutes app-routes
   (GET "/" [] (index))

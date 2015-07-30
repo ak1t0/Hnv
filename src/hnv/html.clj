@@ -168,8 +168,6 @@
        :src "/resources/js/materialize.min.js"}]
     navbar qnews-bar (qcard) footer])
 
-
-
 (defn index []
   (html5 head top))
 
