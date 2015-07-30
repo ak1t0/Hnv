@@ -47,7 +47,7 @@
           [:h4 "Introduction"]
           [:h5 {:class "light"} [:p]]
           [:h5 {:class "light"}
-            "Hnv is read-only HackerNews Viewer and based on HackerNews API."]]]]
+            "Hnv is read-only HackerNews Viewer and use HackerNews API."]]]]
     [:br] [:br]])
 
 (def footer
