@@ -37,7 +37,7 @@
              :class "btn-large waves-effect waves-light orange"}
              "TOP 10 News"]]
       [:div {:class "row center"}
-        [:a {:href "/qnews"
+        [:a {:href "/#"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
              "High socre News (under construction)"]]
