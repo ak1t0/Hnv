@@ -37,7 +37,7 @@
              :class "btn-large waves-effect waves-light orange"}
              "TOP 10 News"]]
       [:div {:class "row center"}
-        [:a {:href "/tnews"
+        [:a {:href "/qnews"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
              "High socre News"]]
@@ -60,22 +60,26 @@
     [:div {:class "container"}
       [:div {:class "row"}
         [:div {:class "col l6 s12"}
-          [:h5 {:class "white-text"} "Company Bio"]
-          [:p {:class "grey-text text-lighten-4"} "Bio"]]
+          [:h5 {:class "white-text"} "" ]
+          [:p {:class "grey-text text-lighten-4"} " "]]
         [:div {:class "col l3 s12"}
-          [:h5 {:class "white-text"}"Settings"]
+          [:h5 {:class "white-text"}" "]
           [:ul
-            [:li [:a {:class "white-text" :href "#!"} "Link 1"]]]]
+            [:li [:a {:class "white-text" } " "]]]]
         [:div {:class "col l3 s12"}
           [:h5 {:class "white-text"}"Connect"]
-          [:ul
-            [:li [:a {:class "white-text" :href "#!"} "Link 1"]]]]]]
+            [:br]
+            [:iframe {:src
+                      "http://ghbtns.com/github-btn.html?user=ak1t0&repo=Hnv&type=watch&count=true&size=large"
+                      :allowtransparency "true" :frameborder "0" :scrolling "0"
+                      :width "170" :height "30"}]
+            [:br] [:br]]]]
     [:div {:class "footer-copyright"}
       [:div {:class "container"}
         "Made by "
         [:a {:class "orange-text text-lighten-3"
              :href "http://materializecss.com"}
-             "devs"]]]])
+             "Materialize"]]]])
 (def top
   [:body
     [:script

@@ -7,12 +7,18 @@
                  [clj-http "2.0.0"]
                  [org.clojure/tools.namespace "0.2.11"]
                  [org.clojure/data.json "0.2.6"]
-                 [compojure "1.4.0"]
-                 [ring/ring-jetty-adapter "1.4.0"]
+                 [compojure "1.3.1"]
+                 [ring/ring-defaults "0.1.2"]
                  [hiccup "1.0.5"]]
   :plugins [[lein-ring "0.9.6"]]
   :repl-options
   {:init-ns hnv.html
    :prompt (fn [ns] (str ns " > " ))}
   ;; for ring
-  :ring {:handler hnv.handler/app})
+  :ring {:handler hnv.handler/app}
+  :main hnv.handler
+  :uberjar-name "hnv-standalone.jar"
+  :profiles
+  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
+                        [ring-mock "0.1.5"]]}}
+  )
