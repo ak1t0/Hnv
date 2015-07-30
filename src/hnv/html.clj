@@ -32,10 +32,15 @@
         [:h5 {:class "header col s12 light"}
           "A simple HackerNews viewer"]]
       [:div {:class "row center"}
-        [:a {:href "/news"
+        [:a {:href "/tnews"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
-             "Get Started"]]
+             "TOP 10 News"]]
+      [:div {:class "row center"}
+        [:a {:href "/tnews"
+             :id "download-button"
+             :class "btn-large waves-effect waves-light orange"}
+             "High socre News"]]
       [:br] [:br]]])
 
 (def body2
@@ -82,36 +87,40 @@
     navbar body1 body2 footer
     ])
 
+(def topnews-bar
+  [:div {:class "container"}
+    [:div {:class "row center"}
+      [:h3 {:class "header col s12 light"}
+        "TOP News"]]])
+
+(defn containize [x]
+  [:div {:class "row"}
+    [:div {:class "container"} x]])
+
 (defn cardnize [[user score time title url]]
-  [:div {:class "col s12 m6"}
-    [:div {:class "card"}
+  [:div {:class "col s12 m12"}
+    [:div {:class "card hoverable"}
       [:div {:class "card-content"}
         [:h5 title]
-        [:p url]
+        [:p {:class "gray-text"} url]
         [:p (str score " points " " by " user  " ago ")]]
       [:div {:class "card-action"}
         [:a {:href url} "Source"]
         [:a {:href "#"} "More"]]]])
 
-(defn card-join [x]
-  (if (== 1 (count x))
-    [:div {:class "row"} [:div {:class "container"} (first x)]]
-    [:div {:class "row"} [:div {:class "container"} (first x) (second x)]]))
+(defn generate-tcard [id]
+  (->> id
+    (query/get-json)
+    (query/format-json)
+    (cardnize)))
 
-(defn pair-to-card [pair]
-  (->> pair
-    (map query/get-json)
-    (map query/format-json)
-    (map cardnize)
-    (card-join)))
-
-(defn card []
+(defn tcard []
   (->> (query/get-topstory)
-    (take 30)
-    (partition-all 2)
-    (map pair-to-card)))
+    (take 10)
+    (map generate-tcard)
+    (containize)))
 
-(def news
+(def topnews
   [:body
     [:script
       {:type "text/javascript"
@@ -119,10 +128,49 @@
     [:script
       {:type "text/javascript"
        :src "/resources/js/materialize.min.js"}]
-    navbar (card) footer])
+    navbar topnews-bar (tcard) footer])
+
+(def qnews-bar
+  [:div {:class "container"}
+    [:div {:class "row center"}
+      [:h3 {:class "header col s12 light"}
+        "High score News"]]])
+
+(defn score? [x]
+  (if (>= (second x) 100) x nil))
+
+(defn generate-qcard [id]
+  (->> id
+    (query/get-json)
+    (query/format-json)
+    (score?)))
+
+(defn qcard []
+  (->> (query/get-topstory)
+    (map generate-qcard)
+    (filter #(not= % nil))
+    (sort-by second)
+    (take 10)
+    (map cardnize)
+    (containize)))
+
+(def qnews
+  [:body
+    [:script
+      {:type "text/javascript"
+       :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
+    [:script
+      {:type "text/javascript"
+       :src "/resources/js/materialize.min.js"}]
+    navbar qnews-bar (qcard) footer])
+
+
 
 (defn index []
   (html5 head top))
 
-(defn viewer []
-  (html5 head news))
+(defn top-viewer []
+  (html5 head topnews))
+
+(defn quality-viewer []
+  (html5 head qnews))

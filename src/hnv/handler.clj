@@ -4,11 +4,12 @@
             [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
             [clojure.java.io :as io]
-            [hnv.html :refer [index viewer]]))
+            [hnv.html :refer [index top-viewer quality-viewer]]))
 
 (defroutes app-routes
   (GET "/" [] (index))
-  (GET "/news" [] (viewer))
+  (GET "/tnews" [] (top-viewer))
+  (GET "/qnews" [] (quality-viewer))
   (GET "/resources/css/:file" [file]
     (io/file (str "resources/css/" file)))
   (GET "/resources/js/:file" [file]

@@ -12,7 +12,7 @@
                  [hiccup "1.0.5"]]
   :plugins [[lein-ring "0.9.6"]]
   :repl-options
-  {:init-ns hnv.core
+  {:init-ns hnv.html
    :prompt (fn [ns] (str ns " > " ))}
   ;; for ring
   :ring {:handler hnv.handler/app})
