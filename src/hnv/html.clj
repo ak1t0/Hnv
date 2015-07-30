@@ -101,13 +101,13 @@
   [:div {:class "row"}
     [:div {:class "container"} x]])
 
-(defn cardnize [[user score time title url]]
+(defn cardnize [[user score time title url comments]]
   [:div {:class "col s12 m12"}
     [:div {:class "card hoverable"}
       [:div {:class "card-content"}
         [:h5 title]
         [:p {:class "gray-text"} url]
-        [:p (str score " points " " by " user  " ago ")]]
+        [:p (str comments " comments " score " points " " by " user  " ago ")]]
       [:div {:class "card-action"}
         [:a {:href url} "Source"]
         [:a {:href "#"} "More"]]]])

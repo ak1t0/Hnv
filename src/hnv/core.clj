@@ -22,5 +22,5 @@
       :body
       (json/read-str :key-fn keyword)))
 
-(defn format-json [{:keys [by score time title url]}]
-  [by score time title url])
+(defn format-json [{:keys [by score time title url descendants]}]
+  [by score time title url descendants])
