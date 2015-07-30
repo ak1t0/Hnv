@@ -124,7 +124,7 @@
     (map generate-tcard)
     (containize)))
 
-(def topnews
+(defn topnews []
   [:body
     [:script
       {:type "text/javascript"
@@ -158,7 +158,7 @@
     (map cardnize)
     (containize)))
 
-(def qnews
+(defn qnews []
   [:body
     [:script
       {:type "text/javascript"
@@ -172,7 +172,7 @@
   (html5 head top))
 
 (defn top-viewer []
-  (html5 head topnews))
+  (html5 head (topnews)))
 
 (defn quality-viewer []
-  (html5 head qnews))
+  (html5 head (qnews)))
