@@ -18,6 +18,7 @@
   :ring {:handler hnv.handler/app}
   :main hnv.handler
   :uberjar-name "hnv-standalone.jar"
+  :min-lein-version "2.4.0"
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring-mock "0.1.5"]]}}
