@@ -40,7 +40,7 @@
         [:a {:href "/qnews"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
-             "High socre News"]]
+             "High socre News (under construction)"]]
       [:br] [:br]]])
 
 (def body2
