@@ -4,7 +4,8 @@
             [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
             [clojure.java.io :as io]
-            [hnv.html :refer [index top-viewer quality-viewer]]))
+            [hnv.html :refer [index top-viewer quality-viewer]])
+  (:gen-class))
 
 (defroutes app-routes
   (GET "/" [] (index))
