@@ -110,7 +110,7 @@
         [:p (str comments " comments " score " points " " by " user " " time " ago ")]]
       [:div {:class "card-action"}
         [:a {:href url} "Source"]
-        [:a {:href "#"} "More"]]]])
+        [:a "More (under construction)"]]]])
 
 (defn tcard []
   (->> (query/get-topstory)
