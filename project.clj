@@ -10,8 +10,8 @@
                  [compojure "1.3.1"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.2"]
-                 [hiccup "1.0.5"]]
-                 [environ "1.0.0"]
+                 [hiccup "1.0.5"]
+                 [environ "1.0.0"]]
   :plugins [[lein-ring "0.9.6"]
             [lein-environ "1.0.0"]]
   :repl-options
