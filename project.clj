@@ -8,10 +8,12 @@
                  [org.clojure/tools.namespace "0.2.11"]
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.3.1"]
-                 [ring "1.4.0"] 
+                 [ring "1.4.0"]
                  [ring/ring-defaults "0.1.2"]
                  [hiccup "1.0.5"]]
-  :plugins [[lein-ring "0.9.6"]]
+                 [environ "1.0.0"]
+  :plugins [[lein-ring "0.9.6"]
+            [lein-environ "1.0.0"]]
   :repl-options
   {:init-ns hnv.html
    :prompt (fn [ns] (str ns " > " ))}
