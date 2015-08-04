@@ -1,5 +1,6 @@
 (ns hnv.html
   (:require [hiccup.page :refer [html5]]
+            [clojure.core.reducers :as r]
             [hnv.core :as query]))
 
 (def head
@@ -37,10 +38,10 @@
              :class "btn-large waves-effect waves-light orange"}
              "TOP 10 News"]]
       [:div {:class "row center"}
-        [:a {:href "/#"
+        [:a {:href "/qnews"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
-             "High socre News (under construction)"]]
+             "High socre News"]]
       [:br] [:br]]])
 
 (def body2
@@ -115,9 +116,10 @@
 (defn tcard []
   (->> (query/get-topstory)
     (take 10)
-    (map query/get-json)
-    (map query/format-json)
-    (map cardnize)
+    (r/map query/get-json)
+    (into [])
+    (pmap query/format-json)
+    (pmap cardnize)
     (containize)))
 
 (defn topnews []
@@ -139,19 +141,17 @@
 (defn score? [x]
   (if (>= (second x) 100) x nil))
 
-(defn generate-qcard [id]
-  (->> id
-    (query/get-json)
-    (query/format-json)
-    (score?)))
-
 (defn qcard []
   (->> (query/get-topstory)
-    (map generate-qcard)
+    (take 30)
+    (r/map query/get-json)
+    (into [])
+    (pmap query/format-json)
+    (pmap score?)
     (filter #(not= % nil))
-    (sort-by second)
+    (sort-by second >)
     (take 10)
-    (map cardnize)
+    (pmap cardnize)
     (containize)))
 
 (defn qnews []
