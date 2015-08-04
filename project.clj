@@ -9,13 +9,13 @@
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.4.0"]
                  [ring "1.4.0"]
-                 ;;[ring/ring-defaults "0.1.2"]
                  [hiccup "1.0.5"]
-                 [environ "1.0.0"]]
+                 [environ "1.0.0"]
+                 [criterium "0.4.3"]]
   :plugins [[lein-ring "0.9.6"]
             [lein-environ "1.0.0"]]
   :repl-options
-  {:init-ns hnv.html
+  {:init-ns hnv.debug
    :prompt (fn [ns] (str ns " > " ))}
   ;; for ring
   :ring {:handler hnv.handler/app}
