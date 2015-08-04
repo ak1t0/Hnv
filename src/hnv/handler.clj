@@ -5,12 +5,13 @@
             [ring.adapter.jetty :as jetty]
             [clojure.java.io :as io]
             [environ.core :refer [env]]
-            [hnv.html :refer [index top-viewer quality-viewer]]))
+            [hnv.html :refer [index top-viewer quality-viewer latest-viewer]]))
 
 (defroutes app-routes
   (GET "/" [] (index))
-  (GET "/tnews" [] (top-viewer))
-  (GET "/qnews" [] (quality-viewer))
+  (GET "/tops" [] (top-viewer))
+  (GET "/scores" [] (quality-viewer))
+  (GET "/latest" [] (latest-viewer))
   (GET "/resources/css/:file" [file]
     (io/file (str "resources/css/" file)))
   (GET "/resources/js/:file" [file]

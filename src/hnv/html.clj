@@ -33,12 +33,17 @@
         [:h5 {:class "header col s12 light"}
           "A simple HackerNews viewer"]]
       [:div {:class "row center"}
-        [:a {:href "/tnews"
+        [:a {:href "/tops"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
              "TOP 10 News"]]
       [:div {:class "row center"}
-        [:a {:href "/qnews"
+        [:a {:href "/latest"
+             :id "download-button"
+             :class "btn-large waves-effect waves-light orange"}
+             "Latest News"]]
+      [:div {:class "row center"}
+        [:a {:href "/scores"
              :id "download-button"
              :class "btn-large waves-effect waves-light orange"}
              "High socre News"]]
@@ -164,6 +169,31 @@
        :src "/resources/js/materialize.min.js"}]
     navbar qnews-bar (qcard) footer])
 
+(def lnews-bar
+  [:div {:class "container"}
+    [:div {:class "row center"}
+      [:h3 {:class "header col s12 light"}
+        "Latest News"]]])
+
+(defn lcard []
+  (->> (query/get-newstory)
+    (take 10)
+    (r/map query/get-json)
+    (into [])
+    (pmap query/format-json)
+    (pmap cardnize)
+    (containize)))
+
+(defn lnews []
+  [:body
+    [:script
+      {:type "text/javascript"
+       :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
+    [:script
+      {:type "text/javascript"
+       :src "/resources/js/materialize.min.js"}]
+    navbar lnews-bar (lcard) footer])
+
 (defn index []
   (html5 head top))
 
@@ -172,3 +202,6 @@
 
 (defn quality-viewer []
   (html5 head (qnews)))
+
+(defn latest-viewer []
+  (html5 head (lnews)))

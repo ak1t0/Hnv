@@ -17,6 +17,12 @@
       :body
       (json/read-str)))
 
+(defn get-newstory []
+  (-> "https://hacker-news.firebaseio.com/v0/newstories.json"
+      (client/get)
+      :body
+      (json/read-str)))
+
 ;; take id number
 (defn get-json [x]
   (-> (str "https://hacker-news.firebaseio.com/v0/item/" x ".json")
