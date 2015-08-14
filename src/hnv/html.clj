@@ -8,12 +8,13 @@
     [:meta {:http-equiv "Content-Type" :content "text/html" :charset "UTF-8"}]
     [:title "Hnv"]
       [:link
-        {:type "text/css" :rel "stylesheet" :href "/resources/css/materialize.min.css"
+        {:type "text/css" :rel "stylesheet"
+         :href "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
          :media "screen,projection"}]
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]])
 
 (def navbar
-  [:nav {:class "light-blue lighten-1" :role "navigation"}
+  [:nav {:class "grey" :role "navigation"}
     [:div {:class "nav-wrapper container"}
       [:a {:id "logo-container" :href "/" :class "brand-logo"} "Hnv"]
       [:ul {:class "right hide-on-med-and-down"}
@@ -64,11 +65,11 @@
 ;    [:br] [:br]])
 
 (def footer
-  [:footer {:class "page-footer orange"}
+  [:footer {:class "grey"}
     [:div {:class "container"}
       [:div {:class "row"}
         [:div {:class "col l6 s12"}
-          [:h5 {:class "white-text"} "Hnv is read-only and use HackerNews API." ]
+          [:h6 {:class "white-text"} [:br] [:b "Hnv is read-only and use HackerNews API." ]]
           [:p {:class "grey-text text-lighten-4"} " "]]
         [:div {:class "col l3 s12"}
           [:h5 {:class "white-text"}" "]
@@ -85,7 +86,7 @@
     [:div {:class "footer-copyright"}
       [:div {:class "container"}
         "Made by "
-        [:a {:class "orange-text text-lighten-3"
+        [:a {:class "white-text text-lighten-3"
              :href "http://materializecss.com"}
              "Materialize"]]]])
 
@@ -93,7 +94,8 @@
   [:div {:class "container"}
     [:div {:class "row center"}
       [:h3 {:class "header col s12 light"}
-        "TOP News"]]])
+        "TOP News"
+        [:HR {:width "40%" :size "1" :color "orange"}]]]])
 
 (defn containize [x]
   [:div {:class "row"}
@@ -104,8 +106,8 @@
     [:div {:class "card hoverable"}
       [:div {:class "card-content"}
         [:h5 title]
-        [:p [:span {:style "color:#bdbdbd;"} url]]
-        [:p (str comments " comments " score " points " " by " user " " time " ago ")]]
+        [:p {:style "padding-left:2em"} [:span {:style "color:#bdbdbd;"} url]]
+        [:p {:style "padding-left:2em"} (str comments " comments " score " points " " by " user " " time " ago ")]]
       [:div {:class "card-action"}
         [:a {:href url} "Source"]
         [:a "More (under construction)"]]]])
@@ -148,14 +150,15 @@
        :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
     [:script
       {:type "text/javascript"
-       :src "/resources/js/materialize.min.js"}]
+       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
     navbar topnews-bar (tcard) footer])
 
 (def qnews-bar
   [:div {:class "container"}
     [:div {:class "row center"}
       [:h3 {:class "header col s12 light"}
-        "High score News"]]])
+        "High score News"
+        [:HR {:width "40%" :size "1" :color "orange"}]]]])
 
 (defn score? [x]
   (if (>= (second x) 100) x nil))
@@ -194,14 +197,15 @@
        :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
     [:script
       {:type "text/javascript"
-       :src "/resources/js/materialize.min.js"}]
+       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
     navbar qnews-bar (qcard) footer])
 
 (def lnews-bar
   [:div {:class "container"}
     [:div {:class "row center"}
       [:h3 {:class "header col s12 light"}
-        "Latest News"]]])
+        "Latest News"
+        [:HR {:width "40%" :size "1" :color "orange"}]]]])
 
 (defn lcard []
   (->> (query/get-newstory)
@@ -229,7 +233,7 @@
        :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
     [:script
       {:type "text/javascript"
-       :src "/resources/js/materialize.min.js"}]
+       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
     navbar lnews-bar (lcard) footer])
 
 (defn top []
@@ -239,7 +243,7 @@
        :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
     [:script
       {:type "text/javascript"
-       :src "/resources/js/materialize.min.js"}]
+       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
     navbar body1  (tbox) (qbox) (lbox) footer])
 
 (defn index []
