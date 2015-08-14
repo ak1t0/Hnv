@@ -108,7 +108,7 @@
         [:h5 title]
         [:p {:style "padding-left:2em"} [:span {:style "color:#bdbdbd;"} url]]
         [:p {:style "padding-left:2em"} (str comments " comments " score " points " " by " user " " time " ago ")]]
-      [:div {:class "card-action"}
+      [:div {:class "card-action" :align "right"}
         [:a {:href url} "Source"]
         [:a "More (under construction)"]]]])
 
