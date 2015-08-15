@@ -35,36 +35,7 @@
       [:div {:class "row center"}
         [:h5 {:class "header col s12 light"}
           "A simple HackerNews viewer"]]
-      (comment
-      [:div {:class "row center"}
-        [:a {:href "/tops"
-             :id "download-button"
-             :class "btn-large waves-effect waves-light orange"}
-             "TOP 10 News"]]
-      [:div {:class "row center"}
-        [:a {:href "/latest"
-             :id "download-button"
-             :class "btn-large waves-effect waves-light orange"}
-             "Latest News"]]
-      [:div {:class "row center"}
-        [:a {:href "/scores"
-             :id "download-button"
-             :class "btn-large waves-effect waves-light orange"}
-             "High socre News"]]
-      )
       [:br] [:br]]])
-
-;(def body2
-;  [:div {:class "container"}
-;    [:div {:class "section"}
-;      [:div {:class "row"}
-;        [:div {:class "col s12 center"}
-;          ;; [:h3 [:i {:class "mdi-content-send brown-text"}]]
-;          [:h4 "Introduction"]
-;          [:h5 {:class "light"} [:p]]
-;          [:h5 {:class "light"}
-;            "Hnv is read-only HackerNews Viewer and use HackerNews API."]]]]
-;    [:br] [:br]])
 
 (def footer
   [:footer {:class "grey"}
@@ -78,7 +49,6 @@
           [:ul
             [:li [:a {:class "white-text" } " "]]]]
         [:div {:class "col l3 s12"}
-          ;;[:h5 {:class "white-text"}"Connect"]
           [:br]
           [:iframe {:src
                     "https://ghbtns.com/github-btn.html?user=ak1t0&repo=Hnv&type=watch&count=true&size=large"
@@ -97,16 +67,12 @@
     [:div {:class "row center"}
       [:h3 {:class "header col s12 light"}
         "TOP News"
-        [:HR {:width "40%" :size "1" :color "orange"}]]]])
-
-(defn containizehr [x]
-  [:div {:class "row"}
-    [:div {:class "container"}
-      [:HR {:width "70%" :size "1" :color "orange"}] x]])
+        [:HR {:width "40%" :size "2" :color "orange"}]]]])
 
 (defn containize [x]
   [:div {:class "row"}
-    [:div {:class "container"} x]])
+    [:div {:class "container"}
+    (interpose [:HR {:width "70%" :size "1" :color "orange"}] x)]])
 
 (defn cardnize [[user score time title url comments]]
   [:div {:class "col s12 m12"}
@@ -138,7 +104,7 @@
     (into [])
     (pmap query/format-json)
     (pmap cardnize)
-    (containizehr)))
+    (containize)))
 
 (defn tbox []
   (->> (query/get-topstory)
@@ -165,7 +131,7 @@
     [:div {:class "row center"}
       [:h3 {:class "header col s12 light"}
         "High score News"
-        [:HR {:width "40%" :size "1" :color "orange"}]]]])
+        [:HR {:width "40%" :size "2" :color "orange"}]]]])
 
 (defn score? [x]
   (if (>= (second x) 100) x nil))
@@ -181,7 +147,7 @@
     (sort-by second >)
     (take 10)
     (pmap cardnize)
-    (containizehr)))
+    (containize)))
 
 (defn qbox []
   (->> (query/get-topstory)
@@ -212,7 +178,7 @@
     [:div {:class "row center"}
       [:h3 {:class "header col s12 light"}
         "Latest News"
-        [:HR {:width "40%" :size "1" :color "orange"}]]]])
+        [:HR {:width "40%" :size "2" :color "orange"}]]]])
 
 (defn lcard []
   (->> (query/get-newstory)
@@ -221,7 +187,7 @@
     (into [])
     (pmap query/format-json)
     (pmap cardnize)
-    (containizehr)))
+    (containize)))
 
 (defn lbox []
   (->> (query/get-newstory)
