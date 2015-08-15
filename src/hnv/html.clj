@@ -7,11 +7,12 @@
   [:head
     [:meta {:http-equiv "Content-Type" :content "text/html" :charset "UTF-8"}]
     [:title "Hnv"]
-      [:link
-        {:type "text/css" :rel "stylesheet"
-         :href "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
-         :media "screen,projection"}]
-      [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]])
+    [:link
+      {:type "text/css" :rel "stylesheet"
+       :href "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
+       :media "screen,projection"}]
+    [:link {:rel "shortcut icon" :href "/resources/favicon.ico">
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]])
 
 (def navbar
   [:nav {:class "grey" :role "navigation"}

@@ -12,12 +12,15 @@
   (GET "/tops" [] (top-viewer))
   (GET "/scores" [] (quality-viewer))
   (GET "/latest" [] (latest-viewer))
-  (GET "/resources/css/:file" [file]
-    (io/file (str "resources/css/" file)))
-  (GET "/resources/js/:file" [file]
-    (io/file (str "resources/js/" file)))
-  (GET "/resources/font/:dir/:file" [dir file]
-    (io/file (str "resources/font/" dir "/" file))))
+
+  ;;(GET "/resources/css/:file" [file]
+  ;;  (io/file (str "resources/css/" file)))
+  ;;(GET "/resources/js/:file" [file]
+  ;;  (io/file (str "resources/js/" file)))
+  ;;(GET "/resources/font/:dir/:file" [dir file]
+  ;;  (io/file (str "resources/font/" dir "/" file)))
+  (GET "/resources/favicon.ico" []
+    (io/file "resources/favicon.ico")))
 
 (def app (handler/site app-routes))
 
