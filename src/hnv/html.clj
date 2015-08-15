@@ -11,7 +11,7 @@
       {:type "text/css" :rel "stylesheet"
        :href "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
        :media "screen,projection"}]
-    [:link {:rel "shortcut icon" :href "/resources/favicon.ico">
+    [:link {:rel "shortcut icon" :href "/resources/favicon.ico"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]])
 
 (def navbar
@@ -31,6 +31,7 @@
     [:div {:class "container"}
       [:br] [:br]
       [:h1 {:class "header center orange-text"} "Hnv"]
+      [:HR {:width "47%" :size "2" :color "orange"}]
       [:div {:class "row center"}
         [:h5 {:class "header col s12 light"}
           "A simple HackerNews viewer"]]
@@ -87,7 +88,7 @@
     [:div {:class "footer-copyright"}
       [:div {:class "container"}
         "Made by "
-        [:a {:class "white-text text-lighten-3"
+        [:a {:class "orange-text text-lighten-3"
              :href "http://materializecss.com"}
              "Materialize"]]]])
 
@@ -97,6 +98,11 @@
       [:h3 {:class "header col s12 light"}
         "TOP News"
         [:HR {:width "40%" :size "1" :color "orange"}]]]])
+
+(defn containizehr [x]
+  [:div {:class "row"}
+    [:div {:class "container"}
+      [:HR {:width "70%" :size "1" :color "orange"}] x]])
 
 (defn containize [x]
   [:div {:class "row"}
@@ -120,8 +126,8 @@
 
 (defn boxnize [[k url] [x1 x2 x3 x4 x5]]
   [:div {:class "col s12 m12"}
-    [:ul {:class "collection with-header"}
-      [:li {:class "collection-header"} [:h4 k]]
+    [:h4 k [:HR {:width "100%" :size "1" :color "orange" :align "left"}]]
+    [:ul {:class "collection"}
       x1 x2 x3 x4 x5
       [:li {:class "collection-item right"} [:a {:href url} "more"]]]])
 
@@ -132,7 +138,7 @@
     (into [])
     (pmap query/format-json)
     (pmap cardnize)
-    (containize)))
+    (containizehr)))
 
 (defn tbox []
   (->> (query/get-topstory)
@@ -175,7 +181,7 @@
     (sort-by second >)
     (take 10)
     (pmap cardnize)
-    (containize)))
+    (containizehr)))
 
 (defn qbox []
   (->> (query/get-topstory)
@@ -215,7 +221,7 @@
     (into [])
     (pmap query/format-json)
     (pmap cardnize)
-    (containize)))
+    (containizehr)))
 
 (defn lbox []
   (->> (query/get-newstory)
@@ -245,7 +251,7 @@
     [:script
       {:type "text/javascript"
        :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
-    navbar body1  (tbox) (qbox) (lbox) footer])
+    navbar body1 (tbox) (qbox) (lbox) footer])
 
 (defn index []
   (html5 head (top)))
