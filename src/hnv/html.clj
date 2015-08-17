@@ -74,6 +74,10 @@
     [:div {:class "container"}
     (interpose [:HR {:width "70%" :size "1" :color "orange"}] x)]])
 
+(defn containizeb [x]
+  [:div {:class "row"}
+    [:div {:class "container"} x]])
+
 (defn cardnize [[user score time title url comments]]
   [:div {:class "col s12 m12"}
     [:div {:class "card hoverable"}
@@ -114,7 +118,7 @@
     (pmap query/format-json)
     (pmap collnize)
     (boxnize ["TOP News" "/tops"])
-    (containize)))
+    (containizeb)))
 
 (defn topnews []
   [:body
@@ -161,7 +165,7 @@
     (take 5)
     (pmap collnize)
     (boxnize ["High score News" "/scores"])
-    (containize)))
+    (containizeb)))
 
 (defn qnews []
   [:body
@@ -197,7 +201,7 @@
     (pmap query/format-json)
     (pmap collnize)
     (boxnize ["Latest News" "/latest"])
-    (containize)))
+    (containizeb)))
 
 (defn lnews []
   [:body
