@@ -1,6 +1,7 @@
 (ns hnv.core
-  (:require [clj-http.client :as client]
-            [clojure.data.json :as json])
+  (:require [org.httpkit.client :as http]
+            [clj-json.core :as json]
+            [plumbing.core :refer [map-keys]])
   (:use [clojure.tools.namespace.repl :only [refresh]]))
 
 (defn format-time [x]
@@ -10,25 +11,41 @@
       (< t 1440) (str (int (/ t 60)) " hours")
       :else (str (int (/ t 1440)) " days"))))
 
+(defn take-body [x]
+  (@x :body))
+
+(defn take-json [obj]
+  (json/parse-string (:body @obj)))
+
+(defn take-json-k [obj]
+  (map-keys keyword
+    (json/parse-string (:body @obj))))
+
+(defn gen-url [x]
+  (str "https://hacker-news.firebaseio.com/v0/item/" x ".json"))
+
 ;; [id, id, id, ...]
 (defn get-topstory []
   (-> "https://hacker-news.firebaseio.com/v0/topstories.json"
-      (client/get)
-      :body
-      (json/read-str)))
+      (http/get)
+      (take-json)))
 
 (defn get-newstory []
   (-> "https://hacker-news.firebaseio.com/v0/newstories.json"
-      (client/get)
-      :body
-      (json/read-str)))
+      (http/get)
+      (take-json)))
 
 ;; take id number
 (defn get-json [x]
   (-> (str "https://hacker-news.firebaseio.com/v0/item/" x ".json")
-      (client/get)
-      :body
-      (json/read-str :key-fn keyword)))
+      (http/get)
+      (take-json-k)))
+
+(defn get-jsons [id]
+  (->> id
+    (map gen-url)
+    (map http/get)
+    (map take-json-k)))
 
 (defn format-json [{:keys [by score time title url descendants]}]
   [by score (format-time time) title url descendants])

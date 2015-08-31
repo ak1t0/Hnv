@@ -19,12 +19,7 @@
     [:div {:class "nav-wrapper container"}
       [:a {:id "logo-container" :href "/" :class "brand-logo"} "Hnv"]
       [:ul {:class "right hide-on-med-and-down"}
-        [:li [:a {:href " "} [:i {:class "mdi-navigation-refresh"}]]]]
-        ]])
-      ;;[:ul {:id "nav-mobile" :class "side-nav"}
-        ;;[:li [:a {:href " "} [:i {:class "mdi-navigation-refresh"}]]]]
-      ;;[:a {:href "#" :data-activates "nav-mobile" :class "button-collapse"}
-        ;;[:i {:class "material-icons"} "menu"]]]])
+        [:li [:a {:href " "} [:i {:class "mdi-navigation-refresh"}]]]]]])
 
 (def body1
   [:div {:class "section no-pad-bot" :id "index-banner"}
@@ -104,8 +99,7 @@
 (defn tcard []
   (->> (query/get-topstory)
     (take 10)
-    (r/map query/get-json)
-    (into [])
+    (query/get-jsons)
     (pmap query/format-json)
     (pmap cardnize)
     (containize)))
@@ -113,8 +107,7 @@
 (defn tbox []
   (->> (query/get-topstory)
     (take 5)
-    (r/map query/get-json)
-    (into [])
+    (query/get-jsons)
     (pmap query/format-json)
     (pmap collnize)
     (boxnize ["TOP News" "/tops"])
@@ -143,8 +136,7 @@
 (defn qcard []
   (->> (query/get-topstory)
     (take 30)
-    (r/map query/get-json)
-    (into [])
+    (query/get-jsons)
     (pmap query/format-json)
     (pmap score?)
     (filter #(not= % nil))
@@ -156,8 +148,7 @@
 (defn qbox []
   (->> (query/get-topstory)
     (take 30)
-    (r/map query/get-json)
-    (into [])
+    (query/get-jsons)
     (pmap query/format-json)
     (pmap score?)
     (filter #(not= % nil))
@@ -196,8 +187,7 @@
 (defn lbox []
   (->> (query/get-newstory)
     (take 5)
-    (r/map query/get-json)
-    (into [])
+    (query/get-jsons)
     (pmap query/format-json)
     (pmap collnize)
     (boxnize ["Latest News" "/latest"])
