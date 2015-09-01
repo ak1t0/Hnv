@@ -178,8 +178,7 @@
 (defn lcard []
   (->> (query/get-newstory)
     (take 10)
-    (r/map query/get-json)
-    (into [])
+    (query/get-jsons)
     (pmap query/format-json)
     (pmap cardnize)
     (containize)))
