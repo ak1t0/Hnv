@@ -1,6 +1,5 @@
 (ns hnv.html
   (:require [hiccup.page :refer [html5]]
-            [clojure.core.reducers :as r]
             [hnv.core :as query]))
 
 (def head
@@ -104,15 +103,6 @@
     (pmap cardnize)
     (containize)))
 
-(defn tbox []
-  (->> (query/get-topstory)
-    (take 5)
-    (query/get-jsons)
-    (pmap query/format-json)
-    (pmap collnize)
-    (boxnize ["TOP News" "/tops"])
-    (containizeb)))
-
 (defn topnews []
   [:body
     [:script
@@ -145,19 +135,6 @@
     (pmap cardnize)
     (containize)))
 
-(defn qbox []
-  (->> (query/get-topstory)
-    (take 30)
-    (query/get-jsons)
-    (pmap query/format-json)
-    (pmap score?)
-    (filter #(not= % nil))
-    (sort-by second >)
-    (take 5)
-    (pmap collnize)
-    (boxnize ["High score News" "/scores"])
-    (containizeb)))
-
 (defn qnews []
   [:body
     [:script
@@ -183,14 +160,42 @@
     (pmap cardnize)
     (containize)))
 
-(defn lbox []
-  (->> (query/get-newstory)
+(defn tbox [t]
+  (->> t
+    (pmap collnize)
+    (boxnize ["TOP News" "/tops"])
+    (containizeb)))
+
+(defn qbox [q]
+  (->> q
+    (pmap score?)
+    (filter #(not= % nil))
+    (sort-by second >)
     (take 5)
-    (query/get-jsons)
-    (pmap query/format-json)
+    (pmap collnize)
+    (boxnize ["High score News" "/scores"])
+    (containizeb)))
+
+(defn lbox [l]
+  (->> l
     (pmap collnize)
     (boxnize ["Latest News" "/latest"])
     (containizeb)))
+
+(defn format-box [x]
+  (let [t (take 5 x) q (take 30 (drop 5 x)) l (drop 35 x)]
+    [:div (tbox t) (qbox q) (lbox l)]))
+
+(defn box-generate [t q l]
+  (->> [(take 5 t) (take 30 q) (take 5 l)]
+    (apply concat)
+    (query/get-jsons)
+    (pmap query/format-json)
+    (format-box)))
+
+(defn box []
+  (let [t (query/get-topstory) q t l (query/get-newstory)]
+    (box-generate t q l)))
 
 (defn lnews []
   [:body
@@ -210,7 +215,7 @@
     [:script
       {:type "text/javascript"
        :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
-    navbar body1 (tbox) (qbox) (lbox) footer])
+    navbar body1 (box) footer])
 
 (defn index []
   (html5 head (top)))
