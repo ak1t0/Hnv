@@ -32,29 +32,34 @@
       [:br] [:br]]])
 
 (def footer
-  [:footer {:class "grey"}
-    [:div {:class "container"}
-      [:div {:class "row"}
-        [:div {:class "col l6 s12"}
-          [:h6 {:class "white-text"} [:br] [:b "Hnv is read-only and use HackerNews API." ]]
-          [:p {:class "grey-text text-lighten-4"} " "]]
-        [:div {:class "col l3 s12"}
-          [:h5 {:class "white-text"}" "]
-          [:ul
-            [:li [:a {:class "white-text" } " "]]]]
-        [:div {:class "col l3 s12"}
-          [:br]
-          [:iframe {:src
-                    "https://ghbtns.com/github-btn.html?user=ak1t0&repo=Hnv&type=watch&count=true&size=large"
-                    :allowtransparency "true" :frameborder "0" :scrolling "0"
-                    :width "170" :height "30"}]
-          [:br] [:br]]]]
-    [:div {:class "footer-copyright"}
+  [:div
+    [:script {:type "text/javascript"
+              :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
+    [:script {:type "text/javascript"
+              :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
+    [:footer {:class "grey"}
       [:div {:class "container"}
-        "Made by "
-        [:a {:class "orange-text text-lighten-3"
-             :href "http://materializecss.com"}
-             "Materialize"]]]])
+        [:div {:class "row"}
+          [:div {:class "col l6 s12"}
+            [:h6 {:class "white-text"} [:br] [:b "Hnv is read-only and use HackerNews API." ]]
+            [:p {:class "grey-text text-lighten-4"} " "]]
+          [:div {:class "col l3 s12"}
+            [:h5 {:class "white-text"}" "]
+            [:ul
+              [:li [:a {:class "white-text" } " "]]]]
+          [:div {:class "col l3 s12"}
+            [:br]
+            [:iframe {:src
+                      "https://ghbtns.com/github-btn.html?user=ak1t0&repo=Hnv&type=watch&count=true&size=large"
+                      :allowtransparency "true" :frameborder "0" :scrolling "0"
+                      :width "170" :height "30"}]
+            [:br] [:br]]]]
+      [:div {:class "footer-copyright"}
+        [:div {:class "container"}
+          "Made by "
+          [:a {:class "orange-text text-lighten-3"
+               :href "http://materializecss.com"}
+               "Materialize"]]]]])
 
 (def topnews-bar
   [:div {:class "container"}
@@ -104,14 +109,7 @@
     (containize)))
 
 (defn topnews []
-  [:body
-    [:script
-      {:type "text/javascript"
-       :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
-    [:script
-      {:type "text/javascript"
-       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
-    navbar topnews-bar (tcard) footer])
+  [:body navbar topnews-bar (tcard) footer])
 
 (def qnews-bar
   [:div {:class "container"}
@@ -136,14 +134,7 @@
     (containize)))
 
 (defn qnews []
-  [:body
-    [:script
-      {:type "text/javascript"
-       :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
-    [:script
-      {:type "text/javascript"
-       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
-    navbar qnews-bar (qcard) footer])
+  [:body navbar qnews-bar (qcard) footer])
 
 (def lnews-bar
   [:div {:class "container"}
@@ -198,14 +189,7 @@
     (box-generate t q l)))
 
 (defn lnews []
-  [:body
-    [:script
-      {:type "text/javascript"
-       :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
-    [:script
-      {:type "text/javascript"
-       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
-    navbar lnews-bar (lcard) footer])
+  [:body navbar lnews-bar (lcard) footer])
 
 (defn top []
   [:body
