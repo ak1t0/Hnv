@@ -192,14 +192,7 @@
   [:body navbar lnews-bar (lcard) footer])
 
 (defn top []
-  [:body
-    [:script
-      {:type "text/javascript"
-       :src "https://code.jquery.com/jquery-2.1.1.min.js"}]
-    [:script
-      {:type "text/javascript"
-       :src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"}]
-    navbar body1 (box) footer])
+  [:body navbar body1 (box) footer])
 
 (defn index []
   (html5 head (top)))
